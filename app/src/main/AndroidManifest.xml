@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Bangkit2024FPBFAA"
         tools:targetApi="31">
         <activity
+            android:name=".ui.setting.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detailuser.DetailActivity"
             android:exported="false" />
         <activity

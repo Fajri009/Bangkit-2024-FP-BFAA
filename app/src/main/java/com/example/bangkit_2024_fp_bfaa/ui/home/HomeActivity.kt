@@ -3,22 +3,34 @@ package com.example.bangkit_2024_fp_bfaa.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bangkit_2024_fp_bfaa.R
 import com.example.bangkit_2024_fp_bfaa.data.response.UserResponse
 import com.example.bangkit_2024_fp_bfaa.databinding.ActivityHomeBinding
+import com.example.bangkit_2024_fp_bfaa.ui.ViewModelFactory
 import com.example.bangkit_2024_fp_bfaa.ui.detailuser.DetailActivity
+import com.example.bangkit_2024_fp_bfaa.ui.setting.*
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    private val viewModel by viewModels<HomeViewModel>()
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val pref = SettingPreferences.getInstance(application.datastore)
+        viewModel = ViewModelProvider(this@HomeActivity, ViewModelFactory(pref)).get(HomeViewModel::class.java)
+
+        switchTheme(viewModel)
+
+        topBar()
+
+        search(binding)
         showRecyclerList()
 
         viewModel.listUser.observe(this) {
@@ -28,8 +40,30 @@ class HomeActivity : AppCompatActivity() {
         viewModel.isLoading.observe(this) {
             showLoading(it)
         }
+    }
 
-        search(binding)
+    private fun switchTheme(viewModel: HomeViewModel) {
+        viewModel.getThemeSetting().observe(this@HomeActivity) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+    }
+
+    private fun topBar() {
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu1 -> {
+                    val intent = Intent(this@HomeActivity, SettingActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menu2 -> true
+                else -> false
+            }
+        }
     }
 
     private fun showRecyclerList() {

@@ -4,9 +4,11 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.bangkit_2024_fp_bfaa.data.response.*
 import com.example.bangkit_2024_fp_bfaa.data.retrofit.ApiConfig
+import com.example.bangkit_2024_fp_bfaa.ui.setting.SettingPreferences
+import kotlinx.coroutines.launch
 import retrofit2.*
 
-class HomeViewModel : ViewModel(){
+class HomeViewModel(private val pref: SettingPreferences): ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -44,6 +46,10 @@ class HomeViewModel : ViewModel(){
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })
+    }
+
+    fun getThemeSetting(): LiveData<Boolean> {
+        return pref.getThemeSetting().asLiveData()
     }
 
     companion object {
