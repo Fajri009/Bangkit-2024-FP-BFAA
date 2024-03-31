@@ -1,4 +1,4 @@
-package com.example.bangkit_2024_fp_bfaa.ui.detailuser
+package com.example.bangkit_2024_fp_bfaa.ui.detailuser.follow
 
 import android.util.Log
 import androidx.lifecycle.*
@@ -15,10 +15,6 @@ class FollowViewModel: ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
-
-    companion object {
-        const val TAG = "FollowerViewModel"
-    }
 
     fun getFollowers(user: String) {
         _isLoading.value = true
@@ -64,5 +60,9 @@ class FollowViewModel: ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })
+    }
+
+    companion object {
+        private const val TAG = "DetailViewModel"
     }
 }

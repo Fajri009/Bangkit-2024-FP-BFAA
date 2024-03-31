@@ -1,4 +1,4 @@
-package com.example.bangkit_2024_fp_bfaa.ui
+package com.example.bangkit_2024_fp_bfaa.ui.viewmodelfactory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory
@@ -7,7 +7,7 @@ import com.example.bangkit_2024_fp_bfaa.ui.setting.SettingPreferences
 import com.example.bangkit_2024_fp_bfaa.ui.setting.SettingViewModel
 
 // Dikarenakan ViewModel terdapat constructor, maka dibuat kelas ini
-class ViewModelFactory(private val pref: SettingPreferences): NewInstanceFactory() {
+class ThemeViewModelFactory(private val pref: SettingPreferences): NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SettingViewModel::class.java)) {

@@ -26,18 +26,6 @@ class UserAdapter(private val listUser: List<UserResponse>) : ListAdapter<UserRe
         }
     }
 
-    companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<UserResponse>() {
-            override fun areItemsTheSame(oldItem: UserResponse, newItem: UserResponse): Boolean {
-                return oldItem == newItem
-            }
-
-            override fun areContentsTheSame(oldItem: UserResponse, newItem: UserResponse): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemListUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -55,5 +43,17 @@ class UserAdapter(private val listUser: List<UserResponse>) : ListAdapter<UserRe
 
     interface OnItemClickCallBack {
         fun onItemClicked(data: UserResponse)
+    }
+
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<UserResponse>() {
+            override fun areItemsTheSame(oldItem: UserResponse, newItem: UserResponse): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: UserResponse, newItem: UserResponse): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }

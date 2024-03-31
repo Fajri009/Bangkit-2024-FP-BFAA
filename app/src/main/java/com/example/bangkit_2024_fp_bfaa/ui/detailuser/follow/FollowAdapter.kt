@@ -1,4 +1,4 @@
-package com.example.bangkit_2024_fp_bfaa.ui.detailuser
+package com.example.bangkit_2024_fp_bfaa.ui.detailuser.follow
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

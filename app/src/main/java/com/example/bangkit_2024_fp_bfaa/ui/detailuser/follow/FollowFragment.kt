@@ -1,4 +1,4 @@
-package com.example.bangkit_2024_fp_bfaa.ui.detailuser
+package com.example.bangkit_2024_fp_bfaa.ui.detailuser.follow
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -27,7 +27,8 @@ class FollowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(FollowViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            FollowViewModel::class.java)
 
         showRecyclerList()
 

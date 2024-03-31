@@ -16,5 +16,6 @@
     <string name="tab_title_2">Following</string>
 
     <!-- Setting Page -->
+    <string name="setting">Setting</string>
     <string name="dark_mode">Dark Mode</string>
 </resources>

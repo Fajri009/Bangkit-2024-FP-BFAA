@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bangkit_2024_fp_bfaa.R
 import com.example.bangkit_2024_fp_bfaa.data.response.UserResponse
 import com.example.bangkit_2024_fp_bfaa.databinding.ActivityHomeBinding
-import com.example.bangkit_2024_fp_bfaa.ui.ViewModelFactory
+import com.example.bangkit_2024_fp_bfaa.ui.viewmodelfactory.ThemeViewModelFactory
 import com.example.bangkit_2024_fp_bfaa.ui.detailuser.DetailActivity
+import com.example.bangkit_2024_fp_bfaa.ui.favorite.FavoriteUserActivity
 import com.example.bangkit_2024_fp_bfaa.ui.setting.*
 
 class HomeActivity : AppCompatActivity() {
@@ -24,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val pref = SettingPreferences.getInstance(application.datastore)
-        viewModel = ViewModelProvider(this@HomeActivity, ViewModelFactory(pref)).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this@HomeActivity, ThemeViewModelFactory(pref)).get(HomeViewModel::class.java)
 
         switchTheme(viewModel)
 
@@ -56,11 +57,15 @@ class HomeActivity : AppCompatActivity() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu1 -> {
-                    val intent = Intent(this@HomeActivity, SettingActivity::class.java)
-                    startActivity(intent)
+                    val settingIntent = Intent(this@HomeActivity, SettingActivity::class.java)
+                    startActivity(settingIntent)
                     true
                 }
-                R.id.menu2 -> true
+                R.id.menu2 -> {
+                    val favIntent = Intent(this@HomeActivity, FavoriteUserActivity::class.java)
+                    startActivity(favIntent)
+                    true
+                }
                 else -> false
             }
         }
@@ -99,7 +104,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showSelectedUser(data: UserResponse) {
         val moveWithParcelableIntent = Intent(this@HomeActivity, DetailActivity::class.java)
-        moveWithParcelableIntent.putExtra(DetailActivity.EXTRA_USER, data)
+        moveWithParcelableIntent.putExtra(DetailActivity.EXTRA_USER, data.login)
         startActivity(moveWithParcelableIntent)
     }
 

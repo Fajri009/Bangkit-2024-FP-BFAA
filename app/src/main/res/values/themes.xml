@@ -2,10 +2,21 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Bangkit2024FPBFAA" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
 
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Theme.Bangkit2024FPBFAA" parent="Base.Theme.Bangkit2024FPBFAA" />
+
+    <style name="BackgroundColor">
+        <item name="tint">@color/white</item>
+        <item name="android:background">@color/colorPrimaryLight</item>
+        <item name="android:backgroundTint">@color/colorPrimaryLight</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/logo_github</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 </resources>

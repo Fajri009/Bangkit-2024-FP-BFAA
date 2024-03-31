@@ -1,21 +1,22 @@
 package com.example.bangkit_2024_fp_bfaa.ui.detailuser
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.bangkit_2024_fp_bfaa.data.database.FavoriteUser
+import com.example.bangkit_2024_fp_bfaa.data.repository.FavoriteUserRepository
 import com.example.bangkit_2024_fp_bfaa.data.response.DetailUserResponse
 import com.example.bangkit_2024_fp_bfaa.data.retrofit.ApiConfig
 import retrofit2.*
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel(application: Application): ViewModel() {
     private val _listDetail = MutableLiveData<DetailUserResponse>()
     val listDetail: LiveData<DetailUserResponse> = _listDetail
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    companion object {
-        private const val TAG = "DetailViewModel"
-    }
+    private val mFavoriteUserRepository: FavoriteUserRepository = FavoriteUserRepository(application)
 
     fun getUser(user: String) {
         _isLoading.value = true
@@ -41,5 +42,19 @@ class DetailViewModel: ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })
+    }
+
+    fun insertFavUser(user: FavoriteUser) {
+        mFavoriteUserRepository.insertFavUser(user)
+    }
+
+    fun deleteFavUser(id: Int) {
+        mFavoriteUserRepository.deleteFavUser(id)
+    }
+
+    fun getAllFavorites(): LiveData<List<FavoriteUser>> = mFavoriteUserRepository.getAllFavUser()
+
+    companion object {
+        private const val TAG = "DetailViewModel"
     }
 }

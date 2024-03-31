@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.bangkit_2024_fp_bfaa.ui.detailuser.follow.FollowFragment
 
 class SectionPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(activity) {
     var username: String = ""
